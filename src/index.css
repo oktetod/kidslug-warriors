@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── GLOBAL MOBILE RESETS ───────────────────────────────────── */
+:root {
+  color-scheme: dark;
+  /* Safe area variables */
+  --sat: env(safe-area-inset-top, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: none;  /* prevent browser scroll/zoom during game */
+}
+
+/* Allow scrolling only in UI screens that need it */
+.allow-scroll {
+  touch-action: pan-y;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+html, body {
+  background: #000;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  /* Prevent iOS rubber-band scroll */
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: auto;
+}
+
+/* ── PHASER CANVAS ──────────────────────────────────────────── */
+canvas {
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  /* Prevent long-press context menu on canvas */
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: none;
+}
+
+#game-container,
+#game-container > canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* ── CUSTOM SCROLLBAR (UI screens) ─────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: #555; border-radius: 2px; }
+
+/* ── GAME HUD FONT ──────────────────────────────────────────── */
+.hud-text {
+  font-family: 'Courier New', Courier, monospace;
+  text-shadow: 2px 2px 0 #000, -1px -1px 0 #000;
+}
+
+/* ── D-PAD BUTTON BASE ──────────────────────────────────────── */
+.dpad-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: rgba(255,255,255,0.85);
+  font-weight: bold;
+  transition: background 0.05s;
+  cursor: pointer;
+  touch-action: none;
+  /* Prevent text selection on button labels */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.dpad-btn:active,
+.dpad-btn.pressed {
+  background: rgba(255,255,255,0.25);
+  border-color: rgba(255,255,255,0.6);
+  transform: scale(0.93);
+}
+
+.dpad-btn.action-jump {
+  border-color: rgba(80, 160, 255, 0.7);
+  background: rgba(40, 100, 220, 0.25);
+}
+.dpad-btn.action-jump:active {
+  background: rgba(80, 160, 255, 0.45);
+}
+
+.dpad-btn.action-fire {
+  border-color: rgba(255, 60, 60, 0.8);
+  background: rgba(200, 30, 30, 0.30);
+}
+.dpad-btn.action-fire:active {
+  background: rgba(255, 60, 60, 0.55);
+}
+
+/* ── OVERLAY SCREENS ────────────────────────────────────────── */
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.82);
+  z-index: 30;
+  gap: 16px;
+}
+
+/* ── MENU / UI SCREENS (portrait-safe scroll) ───────────────── */
+.ui-screen {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+}
