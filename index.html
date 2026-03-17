@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0,
+               minimum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="screen-orientation" content="landscape" />
+    <meta name="full-screen" content="yes" />
+    <meta name="browsermode" content="application" />
+    <meta name="x5-orientation" content="landscape" />
+    <meta name="x5-fullscreen" content="true" />
+    <meta name="x5-page-mode" content="app" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="KidSlug Warriors" />
+    <link rel="manifest" href="manifest.json" />
+    <title>KidSlug Warriors</title>
+    <link rel="icon" href="icon-192.png" />
+    <style>
+      *, *::before, *::after {
+        margin: 0; padding: 0; box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        user-select: none; -webkit-user-select: none;
+        touch-action: none;
+      }
+      html, body {
+        width: 100%; height: 100%; overflow: hidden; background: #000;
+        padding: env(safe-area-inset-top) env(safe-area-inset-right)
+                 env(safe-area-inset-bottom) env(safe-area-inset-left);
+      }
+      #root { position: fixed; inset: 0; width: 100%; height: 100%; background: #000; }
+      #portrait-overlay {
+        display: none; position: fixed; inset: 0; z-index: 9999;
+        background: #000; flex-direction: column;
+        align-items: center; justify-content: center; gap: 20px;
+      }
+      #portrait-overlay .ri { font-size: 72px; animation: sp 1.5s ease-in-out infinite alternate; }
+      #portrait-overlay p { color: #ffcc00; font-family: monospace; font-size: 18px; text-align: center; padding: 0 24px; }
+      @keyframes sp { from { transform: rotate(-20deg); } to { transform: rotate(20deg); } }
+      @media (orientation: portrait) {
+        #portrait-overlay { display: flex; }
+        #root              { display: none;  }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="portrait-overlay">
+      <div class="ri">📱</div>
+      <p>Rotate your device to<br><strong>LANDSCAPE</strong> to play!</p>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="src/main.tsx"></script>
+  </body>
+</html>
